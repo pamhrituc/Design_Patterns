@@ -1,22 +1,24 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Star.h"
+#include "StarList.h"
 
-class ToDoList : public Star
+class ToDoList : public StarList
 {
 private:
 	DateTime date_created;
 	DateTime date_modified;
 	std::string todo_title;
-	std::vector<std::string> todo_list;
+	std::vector<Item> todo_list;
+	//std::vector<Task> todo_list;
 public:
 	ToDoList();
-	void createStar(std::string todo_title) override;
+	void createStar(DateTime date_created, std::string star_title) override;
 	DateTime getDateCreated() const override;
 	DateTime getDateModified() const override;
 	std::string getStarTitle() const override;
-	std::vector<std::string> getToDoList() const;
+	std::vector<Item> getStarContent() const;
+	void addItemToStarList(Item item);
 	~ToDoList();
 };
 

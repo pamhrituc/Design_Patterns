@@ -2,7 +2,6 @@
 enum Type
 {
 	GROCERY_LIST,
-	NOTE,
-	REMINDER,
+	LUGGAGE_LIST,
 	TODO_LIST
 };

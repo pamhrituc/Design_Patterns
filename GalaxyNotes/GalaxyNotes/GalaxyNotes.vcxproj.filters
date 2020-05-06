@@ -22,14 +22,26 @@
     <Filter Include="Source Files\Star">
       <UniqueIdentifier>{efe5202b-2a2c-4470-ae8e-95c4a38b16d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Star">
+    <Filter Include="Header Files\Item">
+      <UniqueIdentifier>{5ba08f3b-d538-49b9-998d-8eb401106a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Item">
+      <UniqueIdentifier>{85350b50-ddd5-45a1-991a-a56ae3087662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StarList">
       <UniqueIdentifier>{eb1da1dd-7273-4f1e-b4c2-6b7277d8fdfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\StarFactory">
+    <Filter Include="Source Files\StarListFactory">
+      <UniqueIdentifier>{933c99cb-5f7f-4b11-87f5-0eaa770ba702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StarListFactory">
       <UniqueIdentifier>{645d52bb-3f91-408b-9ec3-b5ae2d7ce2ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\StarFactory">
-      <UniqueIdentifier>{933c99cb-5f7f-4b11-87f5-0eaa770ba702}</UniqueIdentifier>
+    <Filter Include="Header Files\Iterator">
+      <UniqueIdentifier>{9ffa253e-9e7b-4889-a983-20307ced4d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Iterator">
+      <UniqueIdentifier>{058a315a-09ec-49c2-a12d-1882bcea68e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,49 +51,67 @@
     <ClCompile Include="DateTime.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Star.cpp">
-      <Filter>Source Files\Star</Filter>
-    </ClCompile>
-    <ClCompile Include="Note.cpp">
-      <Filter>Source Files\Star</Filter>
-    </ClCompile>
-    <ClCompile Include="StarFactory.cpp">
-      <Filter>Source Files\StarFactory</Filter>
-    </ClCompile>
     <ClCompile Include="GroceryList.cpp">
-      <Filter>Source Files\Star</Filter>
-    </ClCompile>
-    <ClCompile Include="Reminder.cpp">
       <Filter>Source Files\Star</Filter>
     </ClCompile>
     <ClCompile Include="ToDoList.cpp">
       <Filter>Source Files\Star</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="LuggageList.cpp">
+      <Filter>Source Files\Star</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="StarListFactory.cpp">
+      <Filter>Source Files\StarListFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskAdaptor.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="StarListIterator.cpp">
+      <Filter>Source Files\Iterator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DateTime.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Star.h">
-      <Filter>Header Files\Star</Filter>
-    </ClInclude>
-    <ClInclude Include="Note.h">
-      <Filter>Header Files\Star</Filter>
-    </ClInclude>
-    <ClInclude Include="StarFactory.h">
-      <Filter>Header Files\StarFactory</Filter>
-    </ClInclude>
     <ClInclude Include="GroceryList.h">
-      <Filter>Header Files\Star</Filter>
+      <Filter>Header Files\StarList</Filter>
     </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Reminder.h">
-      <Filter>Header Files\Star</Filter>
-    </ClInclude>
     <ClInclude Include="ToDoList.h">
-      <Filter>Header Files\Star</Filter>
+      <Filter>Header Files\StarList</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="LuggageList.h">
+      <Filter>Header Files\StarList</Filter>
+    </ClInclude>
+    <ClInclude Include="StarList.h">
+      <Filter>Header Files\StarList</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="StarListFactory.h">
+      <Filter>Header Files\StarListFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskAdaptor.h">
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="StarListIterator.h">
+      <Filter>Header Files\Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="Iterator.h">
+      <Filter>Header Files\Iterator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

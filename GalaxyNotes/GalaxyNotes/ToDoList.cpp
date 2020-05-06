@@ -5,10 +5,11 @@ ToDoList::ToDoList()
 {
 }
 
-void ToDoList::createStar(std::string todo_title)
+void ToDoList::createStar(DateTime date_created, std::string star_title)
 {
-	this->todo_title = todo_title;
-	std::cout << "A ToDo has been created with the title: " << this->todo_title;
+	this->date_created = date_created;
+	this->date_modified = date_created;
+	this->todo_title = star_title;
 }
 
 DateTime ToDoList::getDateCreated() const
@@ -26,9 +27,14 @@ std::string ToDoList::getStarTitle() const
 	return this->todo_title;
 }
 
-std::vector<std::string> ToDoList::getToDoList() const
+std::vector<Item> ToDoList::getStarContent() const
 {
 	return this->todo_list;
+}
+
+void ToDoList::addItemToStarList(Item item)
+{
+	this->todo_list.push_back(item);
 }
 
 

@@ -1,23 +1,24 @@
 #pragma once
-#include <map>
 #include <string>
+#include <vector>
 #include "DateTime.h"
-#include "Star.h"
+#include "StarList.h"
 
-class GroceryList : public Star
+class GroceryList : public StarList
 {
 private:
 	DateTime date_created;
 	DateTime date_modified;
 	std::string grocery_title;
-	std::map<std::string, int> grocery_list;
+	std::vector<Item> grocery_list_content;
 public:
 	GroceryList();
-	void createStar(std::string grocery_title) override;
+	void createStar(DateTime date_created, std::string star_title) override;
 	DateTime getDateCreated() const override;
 	DateTime getDateModified() const override;
 	std::string getStarTitle() const override;
-	std::map<std::string, int> getGroceryList() const;
+	std::vector<Item> getStarContent() const override;
+	void addItemToStarList(Item item);
 	~GroceryList();
 };
 

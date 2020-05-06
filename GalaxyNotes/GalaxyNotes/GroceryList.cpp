@@ -5,10 +5,11 @@ GroceryList::GroceryList()
 {
 }
 
-void GroceryList::createStar(std::string grocery_title)
+void GroceryList::createStar(DateTime date_created, std::string star_title)
 {
-	this->grocery_title = grocery_title;
-	std::cout << "A grocery list with the title: " + this->grocery_title + " has been created.";
+	this->date_created = date_created;
+	this->date_modified = date_created;
+	this->grocery_title = star_title;
 }
 
 DateTime GroceryList::getDateCreated() const
@@ -26,11 +27,15 @@ std::string GroceryList::getStarTitle() const
 	return this->grocery_title;
 }
 
-std::map<std::string, int> GroceryList::getGroceryList() const
+std::vector<Item> GroceryList::getStarContent() const
 {
-	return this->grocery_list;
+	return this->grocery_list_content;
 }
 
+void GroceryList::addItemToStarList(Item item)
+{
+	this->grocery_list_content.push_back(item);
+}
 
 GroceryList::~GroceryList()
 {
