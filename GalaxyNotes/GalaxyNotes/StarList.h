@@ -17,5 +17,8 @@ public:
 	virtual std::string getStarTitle() const = 0;
 	virtual std::vector<Item> getStarContent() const = 0;
 	virtual void addItemToStarList(Item item) = 0;
+	virtual void setDateCreated(DateTime* date_created) = 0;
+	virtual void setDateModified(DateTime* date_created) = 0;
+	virtual void setStarTitle(std::string star_title) = 0;
 	virtual ~StarList() {};
 };

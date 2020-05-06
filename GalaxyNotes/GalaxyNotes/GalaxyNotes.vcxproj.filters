@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{9637980c-7cc1-4d0c-933f-a6f629b9ecae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Star">
-      <UniqueIdentifier>{efe5202b-2a2c-4470-ae8e-95c4a38b16d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Item">
       <UniqueIdentifier>{5ba08f3b-d538-49b9-998d-8eb401106a0d}</UniqueIdentifier>
     </Filter>
@@ -43,6 +40,15 @@
     <Filter Include="Source Files\Iterator">
       <UniqueIdentifier>{058a315a-09ec-49c2-a12d-1882bcea68e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StarList">
+      <UniqueIdentifier>{efe5202b-2a2c-4470-ae8e-95c4a38b16d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Strategy">
+      <UniqueIdentifier>{b9df0def-1164-4603-bd62-f3daec9b145a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Strategy">
+      <UniqueIdentifier>{230520d3-206d-45ef-8199-078bcbef5ab6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GalaxyNotes.cpp">
@@ -52,16 +58,16 @@
       <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="GroceryList.cpp">
-      <Filter>Source Files\Star</Filter>
+      <Filter>Source Files\StarList</Filter>
     </ClCompile>
     <ClCompile Include="ToDoList.cpp">
-      <Filter>Source Files\Star</Filter>
+      <Filter>Source Files\StarList</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
     <ClCompile Include="LuggageList.cpp">
-      <Filter>Source Files\Star</Filter>
+      <Filter>Source Files\StarList</Filter>
     </ClCompile>
     <ClCompile Include="Task.cpp">
       <Filter>Source Files\Item</Filter>
@@ -74,6 +80,18 @@
     </ClCompile>
     <ClCompile Include="StarListIterator.cpp">
       <Filter>Source Files\Iterator</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>Source Files\Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Strategy.cpp">
+      <Filter>Source Files\Strategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,5 +131,22 @@
     <ClInclude Include="Iterator.h">
       <Filter>Header Files\Iterator</Filter>
     </ClInclude>
+    <ClInclude Include="Tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Strategy.h">
+      <Filter>Header Files\Strategy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Galaxy.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

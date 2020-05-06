@@ -156,26 +156,37 @@
     <ClCompile Include="GalaxyNotes.cpp" />
     <ClCompile Include="GroceryList.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Star.cpp" />
     <ClCompile Include="StarListIterator.cpp" />
+    <ClCompile Include="Strategy.cpp" />
     <ClCompile Include="TaskAdaptor.cpp" />
     <ClCompile Include="LuggageList.cpp" />
     <ClCompile Include="StarListFactory.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="Tests.cpp" />
     <ClCompile Include="ToDoList.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Commands.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="GroceryList.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Iterator.h" />
     <ClInclude Include="StarListIterator.h" />
+    <ClInclude Include="Strategy.h" />
     <ClInclude Include="TaskAdaptor.h" />
     <ClInclude Include="LuggageList.h" />
     <ClInclude Include="StarList.h" />
     <ClInclude Include="StarListFactory.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="Tests.h" />
     <ClInclude Include="ToDoList.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="UI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Galaxy.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

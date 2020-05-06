@@ -20,6 +20,20 @@ StarList* StarListIterator::next()
 	return nullptr;
 }
 
+StarList * StarListIterator::current()
+{
+	if (index < stars.size())
+	{
+		return stars.at(index);
+	}
+	return nullptr;
+}
+
+void StarListIterator::goToStart()
+{
+	index = 0;
+}
+
 
 StarListIterator::~StarListIterator()
 {

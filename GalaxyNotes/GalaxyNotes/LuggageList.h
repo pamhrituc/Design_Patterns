@@ -16,7 +16,10 @@ public:
 	DateTime getDateModified() const override;
 	std::string getStarTitle() const override;
 	std::vector<Item> getStarContent() const override;
-	void addItemToStarList(Item item);
+	void addItemToStarList(Item item) override;
+	void setDateCreated(DateTime* date_created) override;
+	void setDateModified(DateTime* date_modified) override;
+	void setStarTitle(std::string star_title) override;
 	~LuggageList();
 };
 

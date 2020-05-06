@@ -11,5 +11,7 @@ public:
 	Iterator() {}
 	virtual bool hasNext() = 0;
 	virtual T next() = 0;
+	virtual T current() = 0;
+	virtual void goToStart() = 0;
 	~Iterator() {}
 };

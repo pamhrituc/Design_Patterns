@@ -9,8 +9,10 @@ public:
 	std::vector<StarList*> stars;
 	unsigned int index = 0;
 	StarListIterator();
-	bool hasNext();
-	StarList* next();
+	bool hasNext() override;
+	StarList* next() override;
+	StarList* current() override;
+	void goToStart() override;
 	~StarListIterator();
 };
 

@@ -1,8 +1,8 @@
 # Design_Patterns
-Note Handler
+List Handler
 Creational Design Pattern used: Factory Method
-Structural Design Patterns used: Composite
-Behavioral Design Patterns used:
+Structural Design Patterns used: Composite, Adaptor
+Behavioral Design Patterns used: Iterator, Strategy
 
 Factory Method Design Pattern:
 StarListFactory -> handles the creation of different types of stars
@@ -19,4 +19,4 @@ Task to Item
 
 Iterator:
 
-Command:
+Strategy
