@@ -87,10 +87,13 @@
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Star.cpp">
+    <ClCompile Include="OrderCreatedDate.cpp">
       <Filter>Source Files\Strategy</Filter>
     </ClCompile>
-    <ClCompile Include="Strategy.cpp">
+    <ClCompile Include="OrderTitle.cpp">
+      <Filter>Source Files\Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
       <Filter>Source Files\Strategy</Filter>
     </ClCompile>
   </ItemGroup>
@@ -141,6 +144,15 @@
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Strategy.h">
+      <Filter>Header Files\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderCreatedDate.h">
+      <Filter>Header Files\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderTitle.h">
+      <Filter>Header Files\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h">
       <Filter>Header Files\Strategy</Filter>
     </ClInclude>
   </ItemGroup>

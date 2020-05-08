@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
+#include "StarListIterator.h"
+
 class Strategy
 {
 public:
-	Strategy();
-	virtual void order(std::string how) = 0;
-	~Strategy();
+	Strategy() {}
+	virtual StarListIterator* order(std::string how, StarListIterator* star_list_iterator) = 0;
+	~Strategy() {}
 };
 

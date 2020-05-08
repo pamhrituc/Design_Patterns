@@ -1,5 +1,182 @@
 #include "UI.h"
 
+DateTime* getNow()
+{
+	time_t rawtime;
+	struct tm * timeinfo;
+	char buffer[80];
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:", timeinfo);
+	std::string str(buffer);
+
+	unsigned int previous = 0;
+	unsigned int current = str.find('-');
+	unsigned int day = stoi(str.substr(previous, current - previous));
+	previous = current + 1;
+	current = str.find('-', previous);
+	unsigned int month = stoi(str.substr(previous, current - previous));
+	previous = current + 1;
+	current = str.find(' ', previous);
+	unsigned int year = stoi(str.substr(previous, current - previous));
+	previous = current + 1;
+	current = str.find(':', previous);
+	unsigned int hour = stoi(str.substr(previous, current - previous));
+	previous = current + 1;
+	current = str.find(':', previous);
+	unsigned int minute = stoi(str.substr(previous, current - previous));
+	return new DateTime(minute, hour, day, month, year);
+}
+
+StarList* add(StarListIterator* star_lists)
+{
+	DateTime* now = getNow();
+
+	bool ok = false;
+	std::string extra;
+	std::string type;
+	std::string title;
+	std::string answer;
+	StarListFactory *star_list_factory = new StarListFactory();
+	StarList* star_list = star_list_factory->getStarListType(Type::DEFAULT);
+	std::vector<Item> items;
+
+	std::cout << "So, you wanna add a star...\n";
+	std::cout << "What do you want the star's type to be?\n";
+	while (!ok)
+	{
+		std::cin >> type;
+		if (type == "GROCERY")
+		{
+			star_list = star_list_factory->getStarListType(Type::GROCERY_LIST);
+			ok = true;
+		}
+		else if (type == "LUGGAGE")
+		{
+			StarList* star_list = star_list_factory->getStarListType(Type::LUGGAGE_LIST);
+			ok = true;
+		}
+		else if (type == "TODO")
+		{
+			StarList* star_list = star_list_factory->getStarListType(Type::TODO_LIST);
+			ok = true;
+		}
+		else
+		{
+			std::cout << "Let's try that again\n";
+			std::cout << "\tType GROCERY to create a grocery list\n";
+			std::cout << "\tType LUGGAGE to create a luggage list\n";
+			std::cout << "\tType TODO to create a todo list\n";
+		}
+	}
+	std::cout << "So, what are you naming this star?\n";
+	std::getline(std::cin, extra);
+	std::getline(std::cin, title);
+	while (star_lists->hasNext())
+	{
+		if (star_lists->current()->getStarTitle() == title)
+		{
+			std::cout << "Whoops. Seems like you already have a star with that title.\n";
+			std::cout << "Maybe try adding a star with a title that's not already in your galaxy.\n";
+			star_lists->goToStart();
+			return nullptr;
+		}
+		star_lists->next();
+	}
+	star_lists->goToStart();
+	star_list->createStar(*now, title);
+	std::cout << "Care to add any items to it?\n";
+	std::cout << "Add as many items as you like. Try not to break the program tho.\n";
+	std::cout << "When you're done, just write DONE.\n";
+	std::string item_title = "";
+	Item* item;
+	while (item_title != "DONE")
+	{
+		std::getline(std::cin, item_title);
+		item = new Item(item_title);
+		star_list->addItemToStarList(*item);
+	}
+	return star_list;
+}
+
+StarListIterator* check(StarListIterator* star_list_iterator)
+{
+	std::string extra;
+	std::string star_title;
+	std::cout << "Care to mention the title of the star you're looking for?\n";
+	std::getline(std::cin, extra);
+	std::getline(std::cin, star_title);
+	std::cout << star_title;
+
+	while (star_list_iterator->hasNext())
+	{
+		if (star_list_iterator->current()->getStarTitle() == star_title)
+		{
+			std::cout << "Found it!\n";
+			std::cout << "Here's your note\n";
+			std::cout << "Title: " << star_list_iterator->current()->getStarTitle() << "\n";
+			std::cout << "Created on: " << star_list_iterator->current()->getDateCreated().day << "/" <<
+				star_list_iterator->current()->getDateCreated().month << "/" <<
+				star_list_iterator->current()->getDateCreated().year << "\n";
+			for (unsigned int j = 0; j < star_list_iterator->current()->getStarContent().size(); j++)
+			{
+				if (star_list_iterator->current()->getStarContent().at(j).getIsItemChecked())
+				{
+					std::cout << "\t[X] " << star_list_iterator->current()->getStarContent().at(j).getItemName() << "\n";
+				}
+				else
+				{
+					std::cout << "\t[] " << star_list_iterator->current()->getStarContent().at(j).getItemName() << "\n";
+				}
+			}
+			unsigned int item_number;
+			std::cout << "Which item would you like to check off?\n";
+			std::cout << "Give the number of the item off the list.\n";
+			std::cin >> item_number;
+			star_list_iterator->current()->getStarContent().at(item_number - 1).setIsItemChecked(true);
+			return star_list_iterator;
+		}
+		star_list_iterator->next();
+	}
+	star_list_iterator->goToStart();
+	std::cout << "Couldn't find your star, sorry.\n";
+	std::cout << "Maybe try creating it?\n";
+	return star_list_iterator;
+}
+
+void help()
+{
+	std::cout << "So, you've decided you need help.\n";
+	std::cout << "You've come to the right place.\n";
+	std::cout << "Here's the list of commands.\n";
+	std::cout << "\t ADD\n";
+	std::cout << "\t\t Allows you to expand your galaxy by adding a star.\n";
+	std::cout << "\t\t Star types include Grocery list, luggage list and todo list.\n";
+	std::cout << "\t\t For grocery type in GROCERY.\n";
+	std::cout << "\t\t For luggage type in LUGGAGE.\n";
+	std::cout << "\t\t For todo type in TODO.\n";
+	std::cout << "\n";
+	std::cout << "\t EXIT\n";
+	std::cout << "\t\t The command to use when you wanna get out of this galaxy and do something else.\n";
+	std::cout << "\n"; 
+	std::cout << "\t HELP\n";
+	std::cout << "\t\t You're here. I'm pretty sure that's the command you used to get here.\n";
+	std::cout << "\n";
+	std::cout << "\t ORDER\n";
+	std::cout << "\t\t Allows you to order your stars either by creation date, either by title.\n";
+	std::cout << "\n";
+	std::cout << "\t SAVE\n";
+	std::cout << "\t\t Saves all modifications to a file. You better be sure about this. No takebacks.\n";
+	std::cout << "\n";
+	std::cout << "\t SHOW\n";
+	std::cout << "\t\t Shows all your stars.\n";
+	std::cout << "\n";
+	std::cout << "\t VIEW\n";
+	std::cout << "\t\t Allows you to view a star giving its title\n";
+}
+
 StarListIterator* load()
 {
 	std::ostringstream os;
@@ -85,7 +262,7 @@ StarListIterator* load()
 				current = token.find(';', previous);
 				std::cout << item->getItemName() << "\n";
 			}
-			break;			
+			break;
 		case 4:
 			previous = 0;
 			current = token.find(':');
@@ -115,60 +292,104 @@ StarListIterator* load()
 	return star_lists;
 }
 
-void help()
+StarListIterator* order(StarListIterator* star_list_iterator)
 {
-	std::cout << "So, you've decided you need help.\n";
-	std::cout << "You've come to the right place.\n";
-	std::cout << "Here's the list of commands.\n";
-	std::cout << "\t ADD <star_type>\n";
-	std::cout << "\t\t Allows you to expand your galaxy by adding a star.\n";
-	std::cout << "\t\t Star types include Grocery list, luggage list and todo list.\n";
-	std::cout << "\t\t For grocery type in groc.\n";
-	std::cout << "\t\t For luggage type in lugg.\n";
-	std::cout << "\t\t For todo type in td.\n";
-	std::cout << "\n";
-	std::cout << "\t HELP.\n";
-	std::cout << "\t\t You're here. I'm pretty sure that's the command you used to get here.\n";
-	std::cout << "\n";
-	std::cout << "\t QUIT.\n";
-	std::cout << "\t\t The command to use when you wanna get out of this galaxy and do something else.\n";
-	std::cout << "\n";
-	std::cout << "\t SAVE.\n";
-	std::cout << "\t\t Saves all modifications to a file. You better be sure about this. No takebacks.\n";
-	std::cout << "\n";
-	std::cout << "\t FILTER <star_type>\n";
-	std::cout << "\t\t Allows you to view star types of your choice.\n";
-	std::cout << "\t\t Star types include Grocery list, luggage list and todo list.\n";
-	std::cout << "\t\t For grocery type in groc.\n";
-	std::cout << "\t\t For luggage type in lugg.\n";
-	std::cout << "\t\t For todo type in td.\n";
-	std::cout << "\n";
-}
-
-void show(StarListIterator* star_lists)
-{
-	unsigned int i = 0;
-	for (i = 0; i < star_lists->stars.size(); i++)
+	bool ok = false;
+	std::string what = "";
+	std::string how = "";
+	std::cout << "What would you like to order your stars by?\n";
+	std::cout << "\tType TITLE for title\n";
+	std::cout << "\tType DATE for creation date\n";
+	while (!ok)
 	{
-		std::cout << "Title: " << star_lists->stars.at(i)->getStarTitle() << "\n";
-		std::cout << "Created on: " << star_lists->stars.at(i)->getDateCreated().day << "/" <<
-			star_lists->stars.at(i)->getDateCreated().month << "/" << star_lists->stars.at(i)->getDateCreated().year << "\n";
-		for (unsigned int j = 0; j < star_lists->stars.at(i)->getStarContent().size(); j++)
+		std::cin >> what;
+		if (what == "TITLE")
 		{
-			if (star_lists->stars.at(i)->getStarContent().at(j).getIsItemChecked())
+			ok = true;
+			Context* context = new Context(new OrderTitle());
+			while (true)
 			{
-				std::cout << "\t[X] " << star_lists->stars.at(i)->getStarContent().at(j).getItemName() << "\n";
+				std::cout << "Would you like to order your noted alphabetically or reverse alphabetically?\n";
+				std::cout << "\tType ASC for alphabetically.\n";
+				std::cout << "\tType DESC for reverse alphabetically.\n";
+				std::cin >> how;
+				if (how == "ASC")
+				{
+					context->executeStrategy("ASC", star_list_iterator);
+					return star_list_iterator;
+				}
+				else if (how == "DESC")
+				{
+					context->executeStrategy("DESC", star_list_iterator);
+					return star_list_iterator;
+				}
+				else
+				{
+					std::cout << "Let's try that again.\n";
+				}
 			}
-			else
+			
+		}
+		else if (what == "DATE")
+		{
+			ok = true;
+			Context* context = new Context(new OrderCreatedDate());
+			while (true)
 			{
-				std::cout << "\t[] " << star_lists->stars.at(i)->getStarContent().at(j).getItemName() << "\n";
+				std::cout << "Would you like to order your noted chronologically or reverse chronologically?\n";
+				std::cout << "\tType ASC for chronologically.\n";
+				std::cout << "\tType DESC for reverse chronologically.\n";
+				std::cin >> how;
+				if (how == "ASC")
+				{
+					context->executeStrategy("ASC", star_list_iterator);
+					return star_list_iterator;
+				}
+				else if (how == "DESC")
+				{
+					context->executeStrategy("DESC", star_list_iterator);
+					return star_list_iterator;
+				}
+				else
+				{
+					std::cout << "Let's try that again.\n";
+				}
 			}
+
+		}
+		else
+		{
+			std::cout << "Let's try that again.\n";
 		}
 	}
 }
 
+void show(StarListIterator* star_lists)
+{
+	while (star_lists->hasNext())
+	{
+		std::cout << "Title: " << star_lists->current()->getStarTitle() << "\n";
+		std::cout << "Created on: " << star_lists->current()->getDateCreated().day << "/" <<
+			star_lists->current()->getDateCreated().month << "/" << star_lists->current()->getDateCreated().year << "\n";
+		for (unsigned int j = 0; j < star_lists->current()->getStarContent().size(); j++)
+		{
+			if (star_lists->current()->getStarContent().at(j).getIsItemChecked())
+			{
+				std::cout << "\t[X] " << star_lists->current()->getStarContent().at(j).getItemName() << "\n";
+			}
+			else
+			{
+				std::cout << "\t[] " << star_lists->current()->getStarContent().at(j).getItemName() << "\n";
+			}
+		}
+		star_lists->next();
+	}
+	star_lists->goToStart();
+}
+
 void save(StarListIterator* star_lists)
 {
+	std::cout << "Saving...\n";
 	std::ofstream outfile;
 	outfile.open("Galaxy.txt");
 	unsigned int i = 0;
@@ -187,8 +408,8 @@ void save(StarListIterator* star_lists)
 		{
 			outfile << "TODO";
 		}
-		outfile << star_lists->current()->getDateCreated().hour << ":" << star_lists->current()->getDateCreated().minute << "~" <<
-			star_lists->current()->getDateCreated().day << "/" << star_lists->current()->getDateCreated().minute << "/" <<
+		outfile << "|" << star_lists->current()->getDateCreated().hour << ":" << star_lists->current()->getDateCreated().minute << "~" <<
+			star_lists->current()->getDateCreated().day << "/" << star_lists->current()->getDateCreated().month << "/" <<
 			star_lists->current()->getDateCreated().year << "~|" << star_lists->current()->getStarTitle() << "|";
 		for (unsigned int j = 0; j < star_lists->current()->getStarContent().size(); j++)
 		{
@@ -197,46 +418,52 @@ void save(StarListIterator* star_lists)
 			{
 				outfile << "*";
 			}
-			outfile << "|" << star_lists->current()->getDateCreated().hour << ":" <<
-				star_lists->current()->getDateCreated().minute << "~" << star_lists->current()->getDateCreated().day << "/" <<
-				star_lists->current()->getDateCreated().month << "/" << star_lists->current()->getDateCreated().year << "~|";
+			outfile << ";";
 		}
+		outfile << "|" << star_lists->current()->getDateCreated().hour << ":" <<
+			star_lists->current()->getDateCreated().minute << "~" << star_lists->current()->getDateCreated().day << "/" <<
+			star_lists->current()->getDateCreated().month << "/" << star_lists->current()->getDateCreated().year << "~|";
 		star_lists->next();
 	}
 	star_lists->goToStart();
 	outfile.close();
+	std::cout << "Saved!\n";
 }
 
 void view(StarListIterator* star_lists)
 {
+	std::string extra;
 	std::string star_title;
 	std::cout << "Care to mention the title of the star you're looking for?\n";
-	std::cin.getline(star_title, 10);
+	std::getline(std::cin, extra);
+	std::getline(std::cin, star_title);
 	std::cout << star_title;
-	unsigned int i = 0;
-	for (i = 0; i < star_lists->stars.size(); i++)
+	
+	while(star_lists->hasNext())
 	{
 		if (star_lists->current()->getStarTitle() == star_title)
 		{
 			std::cout << "Found it!\n";
 			std::cout << "Here's your note\n";
-			std::cout << "Title: " << star_lists->stars.at(i)->getStarTitle() << "\n";
-			std::cout << "Created on: " << star_lists->stars.at(i)->getDateCreated().day << "/" <<
-				star_lists->stars.at(i)->getDateCreated().month << "/" << star_lists->stars.at(i)->getDateCreated().year << "\n";
-			for (unsigned int j = 0; j < star_lists->stars.at(i)->getStarContent().size(); j++)
+			std::cout << "Title: " << star_lists->current()->getStarTitle() << "\n";
+			std::cout << "Created on: " << star_lists->current()->getDateCreated().day << "/" <<
+				star_lists->current()->getDateCreated().month << "/" << star_lists->current()->getDateCreated().year << "\n";
+			for (unsigned int j = 0; j < star_lists->current()->getStarContent().size(); j++)
 			{
-				if (star_lists->stars.at(i)->getStarContent().at(j).getIsItemChecked())
+				if (star_lists->current()->getStarContent().at(j).getIsItemChecked())
 				{
-					std::cout << "\t[X] " << star_lists->stars.at(i)->getStarContent().at(j).getItemName() << "\n";
+					std::cout << "\t[X] " << star_lists->current()->getStarContent().at(j).getItemName() << "\n";
 				}
 				else
 				{
-					std::cout << "\t[] " << star_lists->stars.at(i)->getStarContent().at(j).getItemName() << "\n";
+					std::cout << "\t[] " << star_lists->current()->getStarContent().at(j).getItemName() << "\n";
 				}
 			}
 			return;
 		}
+		star_lists->next();
 	}
+	star_lists->goToStart();
 	std::cout << "Couldn't find your star, sorry.\n";
 	std::cout << "Maybe try creating it?\n";
 }
@@ -255,15 +482,25 @@ void ui()
 		std::cin >> command;
 		if (command == "ADD") 
 		{
-
+			StarList* star_list = add(star_lists);
+			if (star_list)
+			{
+				star_lists->stars.push_back(star_list);
+				std::cout << "Saved!\n";
+			}
+			else
+			{
+				std::cout << "Couldn't save.\n";
+				std::cout << "Maybe try again\n";
+			}
+		}
+		else if (command == "CHECK")
+		{
+			star_lists = check(star_lists);
 		}
 		else if (command == "EXIT")
 		{
 			return;
-		}
-		else if (command == "FILTER")
-		{
-
 		}
 		else if (command == "HELP")
 		{
@@ -271,7 +508,7 @@ void ui()
 		}
 		else if (command == "ORDER")
 		{
-
+			show(order(star_lists));
 		}
 		else if (command == "SAVE")
 		{

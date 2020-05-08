@@ -85,10 +85,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level2</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -152,13 +152,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Context.cpp" />
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="GalaxyNotes.cpp" />
     <ClCompile Include="GroceryList.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="Star.cpp" />
+    <ClCompile Include="OrderCreatedDate.cpp" />
+    <ClCompile Include="OrderTitle.cpp" />
     <ClCompile Include="StarListIterator.cpp" />
-    <ClCompile Include="Strategy.cpp" />
     <ClCompile Include="TaskAdaptor.cpp" />
     <ClCompile Include="LuggageList.cpp" />
     <ClCompile Include="StarListFactory.cpp" />
@@ -169,10 +170,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands.h" />
+    <ClInclude Include="Context.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="GroceryList.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Iterator.h" />
+    <ClInclude Include="OrderCreatedDate.h" />
+    <ClInclude Include="OrderTitle.h" />
     <ClInclude Include="StarListIterator.h" />
     <ClInclude Include="Strategy.h" />
     <ClInclude Include="TaskAdaptor.h" />

@@ -2,12 +2,12 @@
 class DateTime
 {
 public:
-	int minute;
-	int hour;
-	int day;
-	int month;
-	int year;
+	unsigned int minute;
+	unsigned int hour;
+	unsigned int day;
+	unsigned int month;
+	unsigned int year;
 	DateTime();
-	DateTime(int hour, int minute, int day, int month, int year) : hour(hour), minute(minute), day(day), month(month), year(year) {}
+	DateTime(unsigned int hour, unsigned int minute, unsigned int day, unsigned int month, unsigned int year) : hour(hour), minute(minute), day(day), month(month), year(year) {}
 	~DateTime();
 };

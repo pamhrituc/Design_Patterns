@@ -15,7 +15,7 @@ StarList* StarListIterator::next()
 {
 	if (this->hasNext())
 	{
-		return this->stars.at(index);
+		return this->stars.at(index++);
 	}
 	return nullptr;
 }
@@ -24,7 +24,7 @@ StarList * StarListIterator::current()
 {
 	if (index < stars.size())
 	{
-		return stars.at(index);
+		return this->stars.at(index);
 	}
 	return nullptr;
 }
