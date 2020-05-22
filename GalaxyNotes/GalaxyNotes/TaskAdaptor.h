@@ -1,6 +1,7 @@
 #pragma once
+#include "Item.h"
 #include "Task.h"
-class TaskAdaptor
+class TaskAdaptor : public Item
 {
 private:
 	Task item;

@@ -95,6 +95,10 @@ StarList* add(StarListIterator* star_lists)
 	while (item_title != "DONE")
 	{
 		std::getline(std::cin, item_title);
+		if (item_title == "DONE")
+		{
+			break;
+		}
 		item = new Item(item_title);
 		star_list->addItemToStarList(*item);
 	}
@@ -241,12 +245,8 @@ StarListIterator* load()
 			break;
 		case 2:
 			star_list->setStarTitle(token);
-			std::cout << "WhOOP\n";
-			std::cout << token << "\n";
-			std::cout << star_list->getStarTitle() << "\n";
 			break;
 		case 3:
-			std::cout << "Items: " << token << "\n";
 			previous = 0;
 			current = token.find(';');
 			while (current != std::string::npos)
@@ -260,7 +260,6 @@ StarListIterator* load()
 				star_list->addItemToStarList(*item);
 				previous = current + 1;
 				current = token.find(';', previous);
-				std::cout << item->getItemName() << "\n";
 			}
 			break;
 		case 4:
@@ -437,7 +436,6 @@ void view(StarListIterator* star_lists)
 	std::cout << "Care to mention the title of the star you're looking for?\n";
 	std::getline(std::cin, extra);
 	std::getline(std::cin, star_title);
-	std::cout << star_title;
 	
 	while(star_lists->hasNext())
 	{

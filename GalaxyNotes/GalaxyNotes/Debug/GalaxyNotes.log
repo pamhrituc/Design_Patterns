@@ -1,3 +1,3 @@
 ﻿  UI.cpp
-d:\atom\design_patterns\galaxynotes\galaxynotes\ui.cpp(365): warning C4715: 'order': not all control paths return a value
+d:\atom\design_patterns\galaxynotes\galaxynotes\ui.cpp(364): warning C4715: 'order': not all control paths return a value
   GalaxyNotes.vcxproj -> D:\atom\Design_Patterns\GalaxyNotes\Debug\GalaxyNotes.exe
