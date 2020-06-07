@@ -4,19 +4,13 @@ Creational Design Pattern used: Factory Method
 Structural Design Patterns used: Composite, Adaptor
 Behavioral Design Patterns used: Iterator, Strategy
 
-Factory Method Design Pattern:
-StarListFactory -> handles the creation of different types of stars
-StarList -> a default of different types of star lists
-GroceryList
-LuggageList
-ToDoList [This the one that will handle tasks]
 
-Composite Design Pattern:
-A task can have a list of subtasks
+Factory Method is used to create different Star Types
 
-Adaptor:
-Task to Item
+Iterator was implemented to go over the list of Star Lists
 
-Iterator:
+Strategy is used for ordering Star Lists
 
-Strategy
+Composite is found in Tasks
+
+Adaptor was attempted for Item/Task compatibility
